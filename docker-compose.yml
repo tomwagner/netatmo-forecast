@@ -1,0 +1,19 @@
+version: '2'
+
+networks:
+  nginx-proxy:
+    external: true
+
+services:
+  netatmoforecast:
+    build:
+      dockerfile: ./.deploy/Dockerfile
+      context: .
+    image: registry.gitlab.com/tomwagner/netatmo-forecast:latest
+    restart: always
+    env_file:
+      - .env
+    networks:
+      - nginx-proxy
+    environment:
+      - VIRTUAL_NETWORK=nginx-proxy

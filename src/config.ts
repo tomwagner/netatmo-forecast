@@ -8,9 +8,9 @@ export const humanCurrentTime = 'DD.MM. - HH:mm:ss';
 // 2 hours bef. SUN_RISE ... SUN_RISE .. 10 .. NOON .... EVENING -- check timewindow between SUN rise
 
 // number of hours for checking around sun raise
-export const SLIDING_WINDOW_TIME = 2;
+export const SLIDING_WINDOW_TIME = 3;
 // cloud rhreshold when it's decied to truth/false
-export const CLOUD_COVER_THRESHOLD = 0.4;
+export const CLOUD_COVER_THRESHOLD = 0.35;
 
 export const netatmo = {
   home_id: process.env.NETATMO_HOME_ID || '',

@@ -54,13 +54,13 @@ const checkCloudiness = async () => {
     const avg = getAvgCloudCover(
       forecast,
       sunriseTime,
-      moment(sunriseTime).add(3, 'hours')
+      moment(sunriseTime).add(config.SLIDING_WINDOW_TIME, 'hours')
     );
     console.log('Average CloudCover', avg);
 
     if (currentTime.isAfter(startTime) && currentTime.isBefore(endTime)) {
       if (avg <= config.CLOUD_COVER_THRESHOLD) {
-        enableAwayMode(token.access_token, config.netatmo.home_id, endTime.unix());
+        await enableAwayMode(token.access_token, config.netatmo.home_id, endTime.unix());
       }
     } else {
       setupNextCheck(currentTime);

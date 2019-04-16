@@ -5,7 +5,8 @@ networks:
     external: true
 
 services:
-  netatmoforecast:
+  netatmo-forecast:
+    container_name: netatmo-forecast
     build:
       dockerfile: ./.deploy/Dockerfile
       context: .

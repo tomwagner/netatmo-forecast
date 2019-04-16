@@ -50,4 +50,4 @@ deploy:
   script:
     - *createEnv
     - scp -r ./.env ./docker-compose.yml user@${DEPLOYMENT_SERVER_IP}:~/
-    - ssh user@$DEPLOYMENT_SERVER_IP "docker login -u $CI_REGISTRY_USER -p ${CI_JOB_TOKEN} $CI_REGISTRY; docker pull $CI_REGISTRY/${CI_PROJECT_PATH}:latest; docker-compose -f docker-compose.yml --project-name=$(date +%s) up -d;"
+    - ssh user@$DEPLOYMENT_SERVER_IP "docker stop netatmo-forecast; docker rm netatmo-forecast; docker login -u $CI_REGISTRY_USER -p ${CI_JOB_TOKEN} $CI_REGISTRY; docker pull $CI_REGISTRY/${CI_PROJECT_PATH}:latest; docker-compose -f docker-compose.yml --project-name=$(date +%s) up -d;"

@@ -4,7 +4,7 @@ import * as config from './config';
 import { getAvgCloudCover, getStartAndEndTime, getSunriseTime } from './forecast';
 import { Forecast } from './forecast.types';
 import * as netatmo from './netatmo';
-import { enableAwayMode, isAwaySchedule } from './netatmo/helpers';
+import { enableAwayMode, enableScheduleMode, isAwaySchedule } from './netatmo/helpers';
 
 const darkSky = new DarkSky(config.forecast.access_token);
 
@@ -61,6 +61,9 @@ const checkCloudiness = async () => {
     if (currentTime.isAfter(startTime) && currentTime.isBefore(endTime)) {
       if (avg <= config.CLOUD_COVER_THRESHOLD) {
         await enableAwayMode(token.access_token, config.netatmo.home_id, endTime.unix());
+      } else {
+        // if weather in timewindow changes return to schedule mode
+        await enableScheduleMode(token.access_token, config.netatmo.home_id);
       }
     } else {
       setupNextCheck(currentTime);

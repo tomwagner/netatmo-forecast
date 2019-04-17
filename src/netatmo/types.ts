@@ -1,4 +1,3 @@
-
 export interface Room {
   id: string
   name: string
@@ -15,7 +14,6 @@ export enum ModuleType {
 }
 
 export type LangCountryCode = string
-
 
 export interface User {
   email: string
@@ -87,11 +85,11 @@ export interface Home {
 export enum RoomMode {
   schedule = 'schedule',
   away = 'away',
-  hg = 'hg'
+  hg = 'hg',
 }
 
 export type UnixTimeStamp = number
 
 export enum ResponseStatus {
-  ok = "ok"
+  ok = 'ok',
 }

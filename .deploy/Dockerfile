@@ -16,7 +16,6 @@ RUN chmod 777 /app
 RUN apk update
 RUN apk upgrade
 RUN apk add ca-certificates && update-ca-certificates
-# Change TimeZone
 RUN apk add --update tzdata
 ENV TZ=Europe/Prague
 # Clean APK cache

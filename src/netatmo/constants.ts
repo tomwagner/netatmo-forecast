@@ -1,1 +1,1 @@
-export const BASE_URL = 'https://api.netatmo.net';
+export const BASE_URL = 'https://api.netatmo.net'

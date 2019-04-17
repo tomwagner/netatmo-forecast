@@ -1,11 +1,11 @@
-import fetch from 'isomorphic-fetch';
-import { BASE_URL } from './constants';
-import { ResponseStatus, RoomMode, UnixTimeStamp } from './types';
+import fetch from 'isomorphic-fetch'
+import { BASE_URL } from './constants'
+import { ResponseStatus, RoomMode, UnixTimeStamp } from './types'
 
 export interface Props {
-  home_id: string;
-  mode: RoomMode;
-  endtime?: UnixTimeStamp;
+  home_id: string
+  mode: RoomMode
+  endtime?: UnixTimeStamp
 }
 
 interface Response {
@@ -19,14 +19,14 @@ const setthermmode = async (auth: string, props?: Props): Promise<Response> => {
     method: 'POST',
     headers: {
       Authorization: `Bearer ${auth}`,
-      'Content-Type': 'application/json;charset=UTF-8'
+      'Content-Type': 'application/json;charset=UTF-8',
     },
-    body: JSON.stringify(props)
+    body: JSON.stringify(props),
   })
-    .then(response => response.json())
-    .catch(error => {
-      throw new Error(error);
-    });
-};
+    .then((response) => response.json())
+    .catch((error) => {
+      throw new Error(error)
+    })
+}
 
-export default setthermmode;
+export default setthermmode

@@ -23,8 +23,6 @@ const checkCloudiness = async () => {
   try {
     const token = await netatmo.auth(config.netatmo);
 
-    if (await isAwaySchedule(token, config.netatmo.home_id))
-      throw new Error('Away mode enabled, no control needed');
 
     const forecast: Forecast = await darkSky
       .latitude(config.forecast.lat)
@@ -48,6 +46,10 @@ const checkCloudiness = async () => {
       config.SLIDING_WINDOW_TIME
     );
 
+
+    if (await isAwaySchedule(token, config.netatmo.home_id, endTime.unix()))
+      throw new Error('Away mode enabled, no control needed');
+
     console.log('Start Time', startTime.format(config.humanCurrentTime));
     console.log('End Time', endTime.format(config.humanCurrentTime));
 
@@ -69,7 +71,7 @@ const checkCloudiness = async () => {
       setupNextCheck(currentTime);
     }
   } catch (error) {
-    console.log('error', error);
+    console.info(error);
     setupNextCheck(currentTime);
   }
 };

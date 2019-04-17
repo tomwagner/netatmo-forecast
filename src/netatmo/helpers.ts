@@ -35,7 +35,7 @@ export const enableAwayMode = async (
   });
 
 
-export const isAwaySchedule = async (token, home_id): Promise<boolean> => {
+export const isAwaySchedule = async (token, home_id: string, end_time: number): Promise<boolean> => {
   try {
     const homesdata = await netatmo.homesdata(token.access_token, {
       home_id
@@ -53,7 +53,7 @@ export const isAwaySchedule = async (token, home_id): Promise<boolean> => {
         room => room.id === thermostatModule.room_id
       );
       if (room) {
-        return room.therm_setpoint_mode === RoomMode.away;
+        return room.therm_setpoint_mode === RoomMode.away && room.therm_setpoint_end_time !== end_time;
       }
     }
     return false;

@@ -10,7 +10,7 @@ const darkSky = new DarkSky(config.forecast.access_token)
 
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
 
-const setupNextCheck = (currentTime: Moment): Promise<void> => {
+const waitAndPlanNextCheck = (currentTime: Moment): Promise<void> => {
   const nextHour = moment(currentTime).add(1, 'hour')
   console.log('Next Check: ', nextHour.format(config.humanCurrentTime))
   console.log('========================================================')
@@ -58,12 +58,11 @@ const checkCloudiness = async () => {
         // if weather in timewindow changes return to schedule mode
         await enableScheduleMode(token.access_token, config.netatmo.home_id)
       }
-    } else {
-      setupNextCheck(currentTime)
     }
+    waitAndPlanNextCheck(currentTime)
   } catch (error) {
     console.info(error)
-    setupNextCheck(currentTime)
+    waitAndPlanNextCheck(currentTime)
   }
 }
 
